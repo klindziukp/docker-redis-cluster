@@ -1,7 +1,6 @@
-# Build based on redis:7.2.5 from "2024-05-22T23:17:59Z"
-FROM redis@sha256:e422889e156ebea83856b6ff973bfe0c86bce867d80def228044eeecf925592b
-
-LABEL maintainer="Johan Andersson <Grokzen@gmail.com>"
+# Build based on redis:7.4.8
+FROM redis:7.4.8
+LABEL maintainer="Pavel Klindziuk <pavelklindziuk@gmail.com>"
 
 # Some Environment Variables
 ENV HOME /root
@@ -24,7 +23,7 @@ ENV SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
 RUN gem install redis -v 4.1.3
 
 # This will always build the latest release/commit in the 7.2 branch
-ARG redis_version=7.2
+ARG redis_version=7.4.8
 
 RUN wget -qO redis.tar.gz https://github.com/redis/redis/tarball/${redis_version} \
     && tar xfz redis.tar.gz -C / \

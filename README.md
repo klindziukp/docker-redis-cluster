@@ -1,36 +1,19 @@
 # docker-redis-cluster
 
-[![Docker Stars](https://img.shields.io/docker/stars/grokzen/redis-cluster.svg)](https://hub.docker.com/r/grokzen/redis-cluster/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/grokzen/redis-cluster.svg)](https://hub.docker.com/r/grokzen/redis-cluster/)
-[![Build Status](https://travis-ci.org/Grokzen/docker-redis-cluster.svg?branch=master)](https://travis-ci.org/Grokzen/docker-redis-cluster)
-
 Docker image with redis built and installed from source and a cluster is built.
 
-To find all redis-server releases see them here https://github.com/antirez/redis/releases
+Forked from https://github.com/grokzen/docker-redis-cluster because it's not maintained for now
 
+# Available tags
 
-## Discussions, help, guides
+The following tags with pre-built images is available on `docker-hub`.
 
-Github have recently released their `Discussions` feature into beta for more repositories across the github space. This feature is enabled on this repo since a while back.
-
-Becuase we now have this feature, the issues feature will NOT be a place where you can now ask general questions or need simple help with this repo and what it provides.
-
-What can you expect to find in there?
-
- - A place where you can freely ask any question regarding this repo.
- - Ask questions like `how do i do X?`
- - General help with problems with this repo
- - Guides written by me or any other contributer with useful examples and ansers to commonly asked questions and how to resolve thos problems.
- - Approved answers to questions marked and promoted by me if help is provided by the community regarding some questions
-
-
+```
+Redis 7.4.8 - klindziuk/redis-cluster:7.4.8
+```
 ## What this repo and container IS
 
 This repo exists as a resource to make it quick and simple to get a redis cluster up and running with no fuzz or issues with mininal effort. The primary use for this container is to get a cluster up and running in no time that you can use for demo/presentation/development. It is not intended or built for anything else.
-
-I also aim to have every single release of redis that supports a cluster available for use so you can run the exact version you want.
-
-I personally use this to develop redis cluster client code https://github.com/Grokzen/redis-py-cluster
 
 
 ## What this repo and container IS NOT
@@ -57,10 +40,7 @@ The cluster is 6 redis instances running with 3 master & 3 slaves, one slave for
 
 If the flag `-e "SENTINEL=true"` is passed there are 3 Sentinel nodes running on ports 5000 to 5002 matching cluster's master instances.
 
-
 This image requires at least `Docker` version 1.10 but the latest version is recommended.
-
-
 
 # Important for Mac users
 
@@ -77,10 +57,8 @@ export REDIS_CLUSTER_IP=0.0.0.0
 If you are downloading the container from dockerhub, you must add the internal IP environment variable to your `docker run` command.
 
 ```
-docker run -e "IP=0.0.0.0" -p 7000-7005:7000-7005 grokzen/redis-cluster:latest
+docker run -e "IP=0.0.0.0" -p 7000-7005:7000-7005 klindziuk/redis-cluster:latest
 ```
-
-
 
 # Usage
 
@@ -198,7 +176,7 @@ Note that Docker also needs to be [configured](https://docs.docker.com/config/da
 Unfortunately Docker does not handle IPv6 NAT so, when acceptable, `--network host` can be used.
 
     # Example using plain docker
-    docker run -e "IP=::1" -e "BIND_ADDRESS=::" --network host grokzen/redis-cluster:latest
+    docker run -e "IP=::1" -e "BIND_ADDRESS=::" --network host klindziuk/redis-cluster:latest
 
 
 ## Build alternative redis versions
@@ -211,7 +189,7 @@ For a release to be buildable it needs to be present at this url: http://downloa
 To build a different redis version use the argument `--build-arg` argument.
 
     # Example plain docker
-    docker build --build-arg redis_version=6.0.11 -t grokzen/redis-cluster .
+    docker build --build-arg redis_version=7.4.8 -t klindziuk/redis-cluster .
 
 
 ### docker-compose
@@ -219,102 +197,7 @@ To build a different redis version use the argument `--build-arg` argument.
 To build a different redis version use the `--build-arg` argument.
 
     # Example docker-compose
-    docker-compose build --build-arg "redis_version=6.0.11" redis-cluster
-
-
-
-# Available tags
-
-The following tags with pre-built images is available on `docker-hub`.
-
-Latest release in the most recent stable branch will be used as `latest` version.
-
-- latest == 7.2.5
-
-Redis 7.4-rc1 version:
-
-- 7.4-rc1
-
-Redis 7.2.x version:
-
-- 7.2.5
-- 7.2.4
-- 7.2.3
-- 7.2.2
-- 7.2.1
-- 7.2.0
-
-Redis 7.0.x version:
-
-- 7.0.15
-- 7.0.14
-- 7.0.13
-- 7.0.12
-- 7.0.11
-- 7.0.10
-- 7.0.9
-- 7.0.8
-- 7.0.7
-- 7.0.6
-- 7.0.5
-- 7.0.4
-- 7.0.3
-- 7.0.2
-- 7.0.1
-- 7.0.0
-
-Redis 6.2.x versions:
-
-- 6.2.14
-- 6.2.13
-- 6.2.12
-- 6.2.11
-- 6.2.10
-- 6.2.9
-- 6.2.8
-- 6.2.7
-- 6.2.6
-- 6.2.5
-- 6.2.4
-- 6.2.3
-- 6.2.2
-- 6.2.1
-- 6.2.0
-
-Redis 6.0.x versions:
-
-- 6.0.20
-- 6.0.19
-- 6.0.18
-- 6.0.17
-- 6.0.16
-- 6.0.15
-- 6.0.14
-- 6.0.13
-- 6.0.12
-- 6.0.11
-- 6.0.10
-- 6.0.9
-- 6.0.8
-- 6.0.7
-- 6.0.6
-- 6.0.5
-- 6.0.4
-- 6.0.3
-- 6.0.2
-- 6.0.1
-- 6.0.0
-
-
-## Unavailable major versions
-
-The following major versions is no longer available to be downloaded from docker.hub. You can still build and run them directly from this repo.
-
-- 5.0
-- 4.0
-- 3.2
-- 3.0
-
+    docker-compose build --build-arg "redis_version=7.4.8" redis-cluster
 
 # License
 
